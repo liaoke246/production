@@ -1,0 +1,30 @@
+.a{
+    width: 100%;
+    text-align: center;
+
+
+}
+
+input{
+    margin-left: 40%;
+    width: 330px;
+    height: 40px;
+    border: 1px solid #dad9d6;
+    background: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+h1{
+    text-align: center;
+
+}
+
+.p{
+    height: 100px;
+
+    margin: 0 auto;
+    text-align: center;
+
+
+}

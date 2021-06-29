@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>查电费</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+
+
+
+<form method="POST" action="/pw/check" >
+
+    <div class="head">
+        <p class="a">请输入您的宿舍号</p>
+        <div class="c">
+            <input name="campus" placeholder="校区" value="南湖校区">
+            <input name="building" placeholder="宿舍区(例如:杏苑)" >
+            <input name="flatname" placeholder="宿舍楼(例如:杏1楼)" >
+            <input type="text" class="b" placeholder="宿舍号(例如:A7092)" name="roomname" >
+            <button class="submit">查询</button>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+
+</body>
+</html>

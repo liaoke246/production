@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youkeda.app.dao.UserDAO">
+    <resultMap id="BaseResultMap" type="com.youkeda.app.dataobject.UserDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="valid" jdbcType="INTEGER" property="valid"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.youkeda.app.dataobject.UserDO">
+    insert into user ( email,valid, nickname,
+      avatar,password,gender, gmt_created, gmt_modified
+      )
+    values ( #{email,jdbcType=VARCHAR}, 1,#{nickname,jdbcType=VARCHAR},
+      #{avatar,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},  now(), now()
+      )
+  </insert>
+    <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, email,valid, nickname, avatar,password,gender, gmt_created, gmt_modified
+    from user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+</mapper>

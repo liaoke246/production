@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> 欢迎！</title>
+</head>
+
+<p>欢迎您！ 超级人  [[${userName}]]</p>
+<form action="/api/user/logout" method="get">
+    <input type="submit" value="登出">
+</form>
+
+
+<form action="/user/del" method="post">
+    <input type="text" placeholder="输入要删除用户的id" name="id">
+    <input type="submit" value="删除">
+</form>
+
+
+<p>有什么想说的就在这里说吧！</p>
+<form action="/api/comment/post" method="post">
+    这俩框框默认好了
+    <input type="text" name="refId" value="2050001">
+    <input type="text" name="parentId" value="0">
+    <textarea cols="40" rows="5" name="content" placeholder="内容"></textarea>
+    <input type="submit" value="发送">
+</form>
+
+<form action="/api/comment/query" method="get">
+    <input type="text" name="refId" value="2050001">
+    <input type="submit" value="查询评论">
+
+</form>
+
+</body>
+</html>
