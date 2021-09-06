@@ -20,7 +20,7 @@ public class User {
 
     private String nickName;
 
-    private String token;
+
 
     private String avatar;
 
@@ -30,13 +30,7 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtModified;
 
-    public String getToken() {
-        return token;
-    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public long getId() {
         return id;

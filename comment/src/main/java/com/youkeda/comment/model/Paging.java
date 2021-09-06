@@ -33,9 +33,7 @@ public class Paging<R> implements Serializable {
      */
     private List<R> data;
 
-    public Paging() {
 
-    }
 
     public Paging(int pageNum, int pageSize, int totalPage, long totalCount, List<R> data) {
         this.pageNum = pageNum;

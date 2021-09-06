@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -30,34 +33,34 @@ public class CommentAPI {
 
   @PostMapping("/api/comment/post")
   @ResponseBody
-  public Result<Comment> post(@RequestBody JSONObject jsonObject) {
+  public Result<Comment> post(@RequestBody JSONObject jsonObject, HttpServletRequest request,HttpServletResponse response) {
 
     String refId = jsonObject.getString("refId");
-    String parentId2 = jsonObject.getString("parentId");
+    Long parentId = Long.parseLong(jsonObject.getString("parentId"));
     String content = jsonObject.getString("content");
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Cache-Control","no-cache");
+    HttpSession session = request.getSession();
+    long userId = (long)session.getAttribute("userId");
 
-    Long parentId = Long.parseLong(parentId2);
-    String token1 = jsonObject.getString("token");
-  String token = stringRedisTemplate.opsForValue().get("token");
 
-    Long userId = Long.parseLong(token);
 
-    //long userId = (long) request.getSession().getAttribute("userId");
-if(token.equals(token1)){
+
     return commentService.post(refId, userId, parentId, content);
-  }
 
-return null;
+
+
   }
 
   @GetMapping("/api/comment/query")
   @ResponseBody
-  public Map query(@RequestParam("refId") String refId) {
+  public Map query(@RequestParam("refId") String refId,HttpServletResponse response) {
 
     Map returnMap = new HashMap();
     Result<List<Comment>> result = commentService.query(refId);
 
-
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Cache-Control","no-cache");
 
     List<Comment> comments = result.getData();
 

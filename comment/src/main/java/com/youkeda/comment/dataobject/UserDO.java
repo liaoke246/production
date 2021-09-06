@@ -19,15 +19,9 @@ public class UserDO {
     private LocalDateTime gmtCreated;
 
     private LocalDateTime gmtModified;
-    private String token;
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 
-    public String getToken() {
-        return token;
-    }
+
 
     public long getId() {
         return id;
@@ -98,7 +92,7 @@ public class UserDO {
         user.setAvatar(getAvatar());
         user.setGmtCreated(getGmtCreated());
         user.setGmtModified(getGmtModified());
-        user.setToken(getToken());
+
         return user;
     }
 

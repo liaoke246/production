@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,58 +53,47 @@ public class UserAPI {
 
     @PostMapping("/api/user/reg")
     @ResponseBody
-    public Result<User> reg(@RequestBody JSONObject jsonObject) {
+    public Result<User> reg(@RequestBody JSONObject jsonObject,HttpServletResponse response) {
         String userName = jsonObject.getString("userName");
         String pwd = jsonObject.getString("pwd");
 
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Cache-Control","no-cache");
 
 
         return userService.register(userName, pwd);
     }
 
 
-@PostMapping("/api/user/superlogin")
-    public String superLogin(@RequestParam("userName") String userName, @RequestParam("pwd") String pwd, @RequestParam("key") String key, Model model,HttpServletRequest request){
-  Result<User> result = userService.login(userName, pwd);
-
-if(key.equals("kksk") && result.isSuccess()){
-    request.getSession().setAttribute("userId", result.getData().getId());
-    model.addAttribute("userName",userName);
-    return "loginsuccess2";
-}
-return null;
-}
-
     @PostMapping("/api/user/login")
     @ResponseBody
-    public Map login(@RequestBody JSONObject jsonObject) {
+    public Result<User> login(@RequestBody JSONObject jsonObject, HttpServletRequest request,HttpServletResponse response) {
         String userName = jsonObject.getString("userName");
         String pwd = jsonObject.getString("pwd");
-
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Cache-Control","no-cache");
+        User user = new User();
         Result<User> result = userService.login(userName, pwd);
-         String token = String.valueOf(result.getData().getId());
+      if(result.isSuccess()){
+          HttpSession session = request.getSession();
+          session.setAttribute("userId",result.getData().getId());
+      }
 
-        Map returnData = new HashMap();
 
-        returnData.put("data",result);
-        returnData.put("token",token);
-            if (result.isSuccess()) {
-                stringRedisTemplate.opsForValue().set("token",token);
-            return returnData;
-        }
 
-        return null;
+        return result;
     }
 
     @GetMapping("/api/user/logout")
-    public String logout(String token) {
-       if(token.equals(stringRedisTemplate.opsForValue().get("token"))) {
+    public Result logout(HttpServletRequest request) {
+    HttpSession session = request.getSession();
+    session.removeAttribute("userId");
            Result result = new Result();
-           stringRedisTemplate.delete("token");
+
            result.setSuccess(true);
-           return "index";
-       }
-       return null;
+
+
+       return result;
     }
 
 

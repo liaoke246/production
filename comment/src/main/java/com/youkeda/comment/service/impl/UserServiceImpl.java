@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 密码加自定义盐值，确保密码安全
-        String saltPwd = pwd + "_ykd2050";
+        String saltPwd = pwd + "kksk";
         // 生成md5值，并转小写字母
         String md5Pwd = DigestUtils.md5Hex(saltPwd).toUpperCase();
 
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 密码加自定义盐值，确保密码安全
-        String saltPwd = pwd + "_ykd2050";
+        String saltPwd = pwd + "kksk";
         // 生成md5值，并转小写字母
         String md5Pwd = DigestUtils.md5Hex(saltPwd).toUpperCase();
 
