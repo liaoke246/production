@@ -60,8 +60,12 @@ public class CommentServiceImpl implements CommentService {
         comments.forEach(comment -> {
             //得到父评论
             Comment parent = commentMap.get(comment.getParentId());
+            if(parent == null){
+                comment.setParentId(0L);
+            }
+            //操作它的父亲,如果父亲不是空的话
             if (parent != null) {
-                // 初始化 children 变量
+                // 初始化 children 变量 ,儿子为空就创建 不为空就直接添加
                 if (parent.getChildren() == null) {
                     parent.setChildren(new ArrayList<>());
                 }

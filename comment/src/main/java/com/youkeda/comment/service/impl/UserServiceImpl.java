@@ -8,12 +8,14 @@ import com.youkeda.comment.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Component
 public class UserServiceImpl implements UserService {
-
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
     private UserDAO userDAO;
 
@@ -31,8 +33,8 @@ public class UserServiceImpl implements UserService {
             result.setMessage("密码不能为空");
             return result;
         }
-
-        UserDO userDO = userDAO.findByUserName(userName);
+        UserDO userDO =   (UserDO) redisTemplate.opsForValue().get(userName);
+        if(userDO == null) userDAO.findByUserName(userName);
         if (userDO!=null){
             result.setCode("602");
             result.setMessage("用户名已经存在");
@@ -74,8 +76,8 @@ public class UserServiceImpl implements UserService {
             result.setMessage("密码不能为空");
             return result;
         }
-
-        UserDO userDO = userDAO.findByUserName(userName);
+        UserDO userDO =   (UserDO) redisTemplate.opsForValue().get(userName);
+        if(userDO == null) userDO = userDAO.findByUserName(userName);
         if (userDO==null){
             result.setCode("602");
             result.setMessage("用户名不存在");

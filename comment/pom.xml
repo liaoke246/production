@@ -20,6 +20,7 @@
 
     <dependencies>
 
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -29,11 +30,21 @@
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>3.13.0</version>
         </dependency>
+
+
+
         <!-- spring session 支持 -->
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.13.0</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
@@ -72,6 +83,11 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

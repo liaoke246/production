@@ -47,10 +47,10 @@ public class UserAPI {
     }
     @RequestMapping("/register")
     public String reg1(){
-
+    
         return "register.html";
     }
-
+    @CrossOrigin(allowCredentials = "true")
     @PostMapping("/api/user/reg")
     @ResponseBody
     public Result<User> reg(@RequestBody JSONObject jsonObject,HttpServletResponse response) {
@@ -70,9 +70,9 @@ public class UserAPI {
     public Result<User> login(@RequestBody JSONObject jsonObject, HttpServletRequest request,HttpServletResponse response) {
         String userName = jsonObject.getString("userName");
         String pwd = jsonObject.getString("pwd");
-        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Cache-Control","no-cache");
         User user = new User();
+     
         Result<User> result = userService.login(userName, pwd);
       if(result.isSuccess()){
           HttpSession session = request.getSession();

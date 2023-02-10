@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app.all/app.all.iml" filepath="$PROJECT_DIR$/app.all/app.all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app.all/app.all/app.all.iml" filepath="$PROJECT_DIR$/app.all/app.all/app.all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app.all/app.all/application/application.iml" filepath="$PROJECT_DIR$/app.all/app.all/application/application.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/dubbo.iml" filepath="$PROJECT_DIR$/.idea/dubbo.iml" />
     </modules>
   </component>

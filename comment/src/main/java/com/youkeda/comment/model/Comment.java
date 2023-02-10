@@ -18,6 +18,7 @@ public class Comment {
 
 
     private long parentId;
+
     private String content;
 
     private List<Comment> children;
